@@ -51,8 +51,15 @@ class _RegisterState extends State<Register> {
               color: const Color(0xFFFE4545),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Petto."),
+                  children: [
+              Row(
+              children: [
+              Text("Petto."),
+                Image.asset('images/pets.png',
+                    width: 40,
+                    height: 54),
+                ],
+              ),
                   Text("Sign In"),
                 ],
               ),

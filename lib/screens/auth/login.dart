@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,8 +48,17 @@ class _LoginState extends State<Login> {
               color: const Color(0xFFFE4545),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Petto."),
+                children: [
+                  Row(
+                    children: [
+                      Text("Petto."),
+                      Image.asset('images/pets.png',
+                          width: 40,
+                          height: 54),
+                    ],
+                  ),
+
+
                   Text("Sign In"),
                 ],
               ),
@@ -153,7 +163,10 @@ class _LoginState extends State<Login> {
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children:  [
+                                    Image.asset('images/google.png',
+                                    width: 25,
+                                    height: 23),
                                     Text(
                                       "Sign In with Google",
                                       style: TextStyle(
