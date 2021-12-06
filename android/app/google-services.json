@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "203239140433-7d16pq07gkohv9mf09p4plrib1puiphi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.csd095.petto",
+            "certificate_hash": "1f5d8424481289980e3c71b38d924d8a97ddc88c"
+          }
+        },
+        {
           "client_id": "203239140433-ct282fm1f7gboipivtta9qilab0ahu2s.apps.googleusercontent.com",
           "client_type": 3
         }
