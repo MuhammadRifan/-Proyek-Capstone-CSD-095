@@ -9,25 +9,25 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-      ),
-      body: GestureDetector(
-        onTap: () async {
-          await context.read<AuthService>().signOut();
-        },
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(11),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFE4545),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Text(
-            "Logout",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 17,
+      
+      body: SafeArea(
+        child: GestureDetector(
+          onTap: () async {
+            await context.read<AuthService>().signOut();
+          },
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(11),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFE4545),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Text(
+              "Logout",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 17,
+              ),
             ),
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/widget/behavior.dart';
 import '../../core/widget/text_fied.dart';
@@ -43,25 +43,35 @@ class _LoginState extends State<Login> {
         body: Stack(
           children: [
             Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 3.5,
-              color: const Color(0xFFFE4545),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text("Petto."),
-                      Image.asset('images/pets.png',
-                          width: 40,
-                          height: 54),
-                    ],
-                  ),
-
-
-                  Text("Sign In"),
-                ],
+              child: Image.asset(
+                'images/header.png',
+                height: 328,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Petto.",
+                      style: GoogleFonts.ribeyeMarrow(
+                          fontSize: 35, color: Colors.white),
+                    ),
+                    Image.asset('images/pets.png', width: 40, height: 54),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50, horizontal: 25),
+                  child: Text(
+                    "Sign In",
+                    style:
+                        GoogleFonts.roboto(fontSize: 26, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
             Align(
               alignment: Alignment.center,
@@ -163,10 +173,9 @@ class _LoginState extends State<Login> {
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children:  [
+                                  children: [
                                     Image.asset('images/google.png',
-                                    width: 25,
-                                    height: 23),
+                                        width: 25, height: 23),
                                     Text(
                                       "Sign In with Google",
                                       style: TextStyle(

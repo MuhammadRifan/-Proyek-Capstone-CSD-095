@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/widget/behavior.dart';
 import '../../core/widget/text_fied.dart';
@@ -46,23 +46,35 @@ class _RegisterState extends State<Register> {
         body: Stack(
           children: [
             Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 3.5,
-              color: const Color(0xFFFE4545),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-              Row(
+              child: Image.asset(
+                'images/header.png',
+                height: 328,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Text("Petto."),
-                Image.asset('images/pets.png',
-                    width: 40,
-                    height: 54),
-                ],
-              ),
-                  Text("Sign In"),
-                ],
-              ),
+                Row(
+                  children: [
+                    Text(
+                      "Petto.",
+                      style: GoogleFonts.ribeyeMarrow(
+                          fontSize: 35, color: Colors.white),
+                    ),
+                    Image.asset('images/pets.png', width: 40, height: 54),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 25),
+                  child: Text(
+                    "Sign Up",
+                    style:
+                        GoogleFonts.roboto(fontSize: 26, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
             Align(
               alignment: Alignment.center,
