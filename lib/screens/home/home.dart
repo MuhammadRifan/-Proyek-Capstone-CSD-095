@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
           child: Stack(
             children: [
               Image.asset(
-                'images/setbg.png',
+                'assets/images/setbg.png',
                 height: double.infinity,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
                           Row(
                             children: [
                               Image.asset(
-                                'images/userpic.png',
+                                'assets/images/userpic.png',
                                 width: 52,
                                 fit: BoxFit.cover,
                               ),
@@ -79,12 +79,12 @@ class Home extends StatelessWidget {
                                 horizontal: 22,vertical: 5),
                             child: Column(children: [
                               Image.asset(
-                                'images/btn_daftar.png',
+                                'assets/images/btn_daftar.png',
                                 width: 325,
                                 fit: BoxFit.cover,
                               ),
                               Image.asset(
-                                'images/btn_medic.png',
+                                'assets/images/btn_medic.png',
                                 width: 325,
                                 fit: BoxFit.cover,
                               ),
@@ -98,7 +98,7 @@ class Home extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Image.asset('images/dc_pic.png',
+                                  Image.asset('assets/images/dc_pic.png',
                                     width: 52,
                                     height: 52,
                                   ),
@@ -133,7 +133,7 @@ class Home extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  Image.asset('images/dc_pic2.png',
+                                  Image.asset('assets/images/dc_pic2.png',
                                     width: 52,
                                     height: 52,
                                   ),
@@ -175,15 +175,15 @@ class Home extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image.asset('images/ic_notif.png',
+                          Image.asset('assets/images/ic_notif.png',
                             width: 24,
                             height: 24,
                           ),
-                          Image.asset('images/ic_home.png',
+                          Image.asset('assets/images/ic_home.png',
                             width: 24,
                             height: 24,
                           ),
-                          Image.asset('images/ic_profile.png',
+                          Image.asset('assets/images/ic_profile.png',
                             width: 24,
                             height: 24,
                           ),
