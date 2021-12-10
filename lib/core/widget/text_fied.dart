@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FieldAuth extends StatefulWidget {
   const FieldAuth({
@@ -62,6 +63,120 @@ class _FieldAuthState extends State<FieldAuth> {
       onFieldSubmitted: widget.onSubmitted,
       textInputAction: (widget.canNext) ? TextInputAction.next : null,
       validator: widget.validator,
+    );
+  }
+}
+
+class FieldInput extends StatelessWidget {
+  const FieldInput({
+    Key? key,
+    required this.hint,
+    this.controller,
+    this.focusNode,
+    this.validateMode,
+    this.validator,
+    this.onSubmitted,
+    this.maxLength,
+    this.canNext = false,
+    this.numberKeyboard = false,
+    this.numberInput = false,
+  }) : super(key: key);
+
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final AutovalidateMode? validateMode;
+  final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onSubmitted;
+  final String hint;
+  final int? maxLength;
+  final bool canNext;
+  final bool numberKeyboard;
+  final bool numberInput;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      focusNode: focusNode,
+      autovalidateMode: validateMode ?? AutovalidateMode.onUserInteraction,
+      maxLength: maxLength,
+      decoration: InputDecoration(
+        labelText: hint,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+      ),
+      keyboardType:
+          (numberKeyboard || numberInput) ? TextInputType.number : null,
+      inputFormatters: (numberInput)
+          ? [
+              FilteringTextInputFormatter.digitsOnly,
+            ]
+          : null,
+      onFieldSubmitted: onSubmitted,
+      textInputAction: (canNext) ? TextInputAction.next : null,
+      validator: validator,
+    );
+  }
+}
+
+class FieldSearch extends StatefulWidget {
+  const FieldSearch({
+    Key? key,
+    required this.ctrl,
+    required this.focusNode,
+    required this.onSubmitted,
+  }) : super(key: key);
+
+  final TextEditingController ctrl;
+  final FocusNode focusNode;
+  final ValueChanged<String> onSubmitted;
+
+  @override
+  _FieldSearchState createState() => _FieldSearchState();
+}
+
+class _FieldSearchState extends State<FieldSearch> {
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: widget.ctrl,
+      focusNode: widget.focusNode,
+      style: TextStyle(
+        color: Colors.grey.shade700,
+      ),
+      decoration: InputDecoration(
+        hintText: "Search",
+        hintStyle: TextStyle(
+          color: Colors.grey.shade600,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: const Icon(
+          Icons.search_rounded,
+          color: Colors.grey,
+        ),
+        suffixIcon: (widget.ctrl.text.isNotEmpty)
+            ? GestureDetector(
+                onTap: () {
+                  setState(
+                    () => widget.ctrl.text = "",
+                  );
+                },
+                child: const Icon(
+                  Icons.close,
+                  color: Colors.grey,
+                ),
+              )
+            : null,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.zero,
+      ),
+      onSubmitted: widget.onSubmitted,
+      onChanged: (str) => setState(() {}),
     );
   }
 }

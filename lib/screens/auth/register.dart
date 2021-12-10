@@ -1,13 +1,12 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:petto/core/widget/flushbar.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import '../../core/services/auth_service.dart';
 import '../../core/widget/behavior.dart';
+import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
 import 'login.dart';
 
@@ -49,7 +48,7 @@ class _RegisterState extends State<Register> {
         body: Stack(
           children: [
             Image.asset(
-              'images/header.png',
+              'assets/header.png',
               height: MediaQuery.of(context).size.height * 0.4,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -76,7 +75,7 @@ class _RegisterState extends State<Register> {
                                 ),
                               ),
                               Image.asset(
-                                'images/pets.png',
+                                'assets/pets.png',
                                 width: 45,
                               ),
                             ],
@@ -145,7 +144,7 @@ class _RegisterState extends State<Register> {
                                   if (val!.isEmpty) {
                                     return "This field is required";
                                   } else if (val.length < 6) {
-                                    return 'The password must at least 6 characters';
+                                    return 'Password must at least 6 characters';
                                   }
                                 },
                               ),
@@ -180,8 +179,8 @@ class _RegisterState extends State<Register> {
                                     var register = await context
                                         .read<AuthService>()
                                         .registerWithEmailAndPassword(
-                                          _ctrlEmail.text,
-                                          _ctrlPassword.text,
+                                          _ctrlEmail.text.trim(),
+                                          _ctrlPassword.text.trim(),
                                         );
 
                                     if (register.runtimeType != User) {

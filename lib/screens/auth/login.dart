@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:petto/core/widget/dialog.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import '../../core/services/auth_service.dart';
 import '../../core/widget/behavior.dart';
+import '../../core/widget/dialog.dart';
 import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
 import 'register.dart';
@@ -26,7 +27,7 @@ class _LoginState extends State<Login> {
   final _focusNodePassword = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
-  bool loading = false;
+  bool _loading = false;
 
   @override
   void dispose() {
@@ -45,7 +46,7 @@ class _LoginState extends State<Login> {
         body: Stack(
           children: [
             Image.asset(
-              'images/header.png',
+              'assets/header.png',
               height: MediaQuery.of(context).size.height * 0.4,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -72,7 +73,7 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               Image.asset(
-                                'images/pets.png',
+                                'assets/pets.png',
                                 width: 45,
                               ),
                             ],
@@ -144,13 +145,13 @@ class _LoginState extends State<Login> {
                                   clearFocus();
 
                                   if (_formKey.currentState!.validate()) {
-                                    setState(() => loading = true);
+                                    setState(() => _loading = true);
 
                                     var register = await context
                                         .read<AuthService>()
                                         .signInWithEmailAndPassword(
-                                          _ctrlEmail.text,
-                                          _ctrlPassword.text,
+                                          _ctrlEmail.text.trim(),
+                                          _ctrlPassword.text.trim(),
                                         );
 
                                     if (register.runtimeType != User) {
@@ -159,7 +160,7 @@ class _LoginState extends State<Login> {
                                         msg: register.toString(),
                                       );
                                     }
-                                    setState(() => loading = false);
+                                    setState(() => _loading = false);
                                   }
                                 },
                                 child: Container(
@@ -169,7 +170,7 @@ class _LoginState extends State<Login> {
                                     color: const Color(0xFFFE4545),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: (loading)
+                                  child: (_loading)
                                       ? const SpinKitChasingDots(
                                           color: Colors.white,
                                           size: 25,
@@ -203,7 +204,7 @@ class _LoginState extends State<Login> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        'images/google.png',
+                                        'assets/google.png',
                                         width: 23,
                                       ),
                                       const SizedBox(width: 10),

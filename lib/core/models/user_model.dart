@@ -1,19 +1,19 @@
 class UserModel {
   UserModel({
-    this.uid,
-    this.name,
-    this.phone,
-    this.picture,
-    this.address,
-    this.strv,
-    this.level,
+    required this.uid,
+    required this.name,
+    required this.phone,
+    required this.picture,
+    required this.address,
+    required this.strv,
+    required this.level,
   });
 
-  final String? uid;
-  final String? name;
-  final String? phone;
-  final String? picture;
-  final String? address;
-  final String? strv;
-  final String? level;
+  final String uid;
+  final String name;
+  final String phone;
+  final String picture;
+  final String address;
+  final String strv;
+  final int level;
 }
