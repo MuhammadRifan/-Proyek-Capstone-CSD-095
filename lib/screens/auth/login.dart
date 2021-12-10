@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
         body: Stack(
           children: [
             Image.asset(
-              'assets/header.png',
+              'assets/images/header.png',
               height: MediaQuery.of(context).size.height * 0.4,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               Image.asset(
-                                'assets/pets.png',
+                                'assets/images/pets.png',
                                 width: 45,
                               ),
                             ],
@@ -204,7 +204,7 @@ class _LoginState extends State<Login> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        'assets/google.png',
+                                        'assets/images/google.png',
                                         width: 23,
                                       ),
                                       const SizedBox(width: 10),

@@ -48,7 +48,7 @@ class _RegisterState extends State<Register> {
         body: Stack(
           children: [
             Image.asset(
-              'assets/header.png',
+              'assets/images/header.png',
               height: MediaQuery.of(context).size.height * 0.4,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                                 ),
                               ),
                               Image.asset(
-                                'assets/pets.png',
+                                'assets/images/pets.png',
                                 width: 45,
                               ),
                             ],

@@ -58,7 +58,7 @@ Widget build(BuildContext context) {
               decoration: BoxDecoration(
                 color: const Color(0xff7c94b6),
                 image: const DecorationImage(
-                  image: AssetImage('images/userpic.png'),
+                  image: AssetImage('assets/images/userpic.png'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: const BorderRadius.all(
@@ -167,12 +167,8 @@ class ProfileActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          number,
-        ),
-        Text(
-          text,
-        ),
+        Text(number),
+        Text(text),
       ],
     );
   }
