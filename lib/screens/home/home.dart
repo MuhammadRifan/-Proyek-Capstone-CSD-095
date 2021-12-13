@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../core/widget/behavior.dart';
 
 class Home extends StatelessWidget {
@@ -23,11 +25,12 @@ class Home extends StatelessWidget {
               CustomScrollBehavior(
                   child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 16,
-                        horizontal: 12,
+                        horizontal: 16,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +43,7 @@ class Home extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   "Hallo,Wong",
                                   style: GoogleFonts.poppins(
@@ -60,12 +62,14 @@ class Home extends StatelessWidget {
                               fontSize: 20,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Card(
                             elevation: 5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 CupertinoSearchTextField(),
                               ],
                             ),
@@ -74,27 +78,83 @@ class Home extends StatelessWidget {
                             'Browse by Category',
                             style: GoogleFonts.poppins(fontSize: 16),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 22,
-                              vertical: 5,
+                          SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: (){
+
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 111,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                                    child: Image.asset(
+                                      'assets/images/ic_heart.png',
+                                      width: 32,
+                                      height: 32,
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20
+                                      ),
+                                      child: Text('Pet data',
+                                      style: GoogleFonts.roboto(fontSize: 18) ,)),
+                                ],
+                              ),
                             ),
-                            child: Column(children: [
-                              Image.asset(
-                                'assets/images/btn_daftar.png',
-                                width: 325,
-                                fit: BoxFit.cover,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: (){
+
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 111,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                                    child: Image.asset(
+                                      'assets/images/ic_medic.png',
+                                      width: 32,
+                                      height: 32,
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20
+                                      ),
+                                      child: Text('Vet Care',
+                                      style: GoogleFonts.roboto(fontSize: 18) ,)),
+                                ],
                               ),
-                              Image.asset(
-                                'assets/images/btn_medic.png',
-                                width: 325,
-                                fit: BoxFit.cover,
-                              ),
-                            ]),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
                           ),
                           Text(
                             'Our top Veterinary',
                             style: GoogleFonts.poppins(fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                           Column(
                             children: [
@@ -105,18 +165,21 @@ class Home extends StatelessWidget {
                                     width: 52,
                                     height: 52,
                                   ),
-                                  const SizedBox(width: 16),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Drh.Prabowo',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                        ),
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 16),
                                       ),
-                                      const SizedBox(height: 4),
+                                      SizedBox(
+                                        height: 4,
+                                      ),
                                       Text(
                                         'Cat Specialist',
                                         style: GoogleFonts.poppins(
@@ -128,7 +191,9 @@ class Home extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Row(
                                 children: [
                                   Image.asset(
@@ -136,20 +201,59 @@ class Home extends StatelessWidget {
                                     width: 52,
                                     height: 52,
                                   ),
-                                  const SizedBox(width: 16),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Drh.Camilla',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                        ),
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 16),
                                       ),
-                                      const SizedBox(height: 4),
+                                      SizedBox(
+                                        height: 4,
+                                      ),
                                       Text(
                                         'Dog Specialist',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          color: Colors.grey,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/dc_pic2.png',
+                                    width: 52,
+                                    height: 52,
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Drh.Mirza',
+                                        style:
+                                        GoogleFonts.poppins(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text(
+                                        'eye Specialist',
                                         style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.grey,
@@ -164,60 +268,50 @@ class Home extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 50),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                            'assets/images/ic_notif.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          Image.asset(
-                            'assets/images/ic_home.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          Image.asset(
-                            'assets/images/ic_profile.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ],
-                      ),
-                    )
                   ],
                 ),
               ))
             ],
           )
-
-          // child: GestureDetector(
-          //   onTap: () async {
-          //     await context.read<AuthService>().signOut();
-          //     Alert.success(
-          //       context: context,
-          //       msg: "Log out success",
-          //     );
-          //   },
-          //   child: Container(
-          //     width: double.infinity,
-          //     padding: const EdgeInsets.all(11),
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xFFFE4545),
-          //       borderRadius: BorderRadius.circular(8),
-          //     ),
-          //     child: const Text(
-          //       "Logout",
-          //       textAlign: TextAlign.center,
-          //       style: TextStyle(
-          //         fontSize: 17,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           ),
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: (){
+
+              },
+              child: Image.asset(
+                'assets/images/ic_notif.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+
+              },
+              child: Image.asset(
+                'assets/images/ic_home.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+
+              },
+              child: Image.asset(
+                'assets/images/ic_profile.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
