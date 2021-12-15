@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/widget/behavior.dart';
+import '../pet/add_pet.dart';
+import '../vet_care/list_vet_care.dart';
+import 'profile.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,17 +14,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          bottom: false,
-          child: Stack(
-            children: [
-              Image.asset(
-                'assets/images/setbg.png',
-                height: double.infinity,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              CustomScrollBehavior(
-                  child: SingleChildScrollView(
+        // bottom: false,
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/images/setbg.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            CustomScrollBehavior(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Padding(
@@ -79,18 +82,40 @@ class Home extends StatelessWidget {
                               horizontal: 22,
                               vertical: 5,
                             ),
-                            child: Column(children: [
-                              Image.asset(
-                                'assets/images/btn_daftar.png',
-                                width: 325,
-                                fit: BoxFit.cover,
-                              ),
-                              Image.asset(
-                                'assets/images/btn_medic.png',
-                                width: 325,
-                                fit: BoxFit.cover,
-                              ),
-                            ]),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddPet(),
+                                      ),
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    'assets/images/btn_daftar.png',
+                                    width: 325,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ListVetCare(),
+                                      ),
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    'assets/images/btn_medic.png',
+                                    width: 325,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Text(
                             'Our top Veterinary',
@@ -165,59 +190,68 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 50),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                            'assets/images/ic_notif.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          Image.asset(
-                            'assets/images/ic_home.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          Image.asset(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                          'assets/images/ic_notif.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                        Image.asset(
+                          'assets/images/ic_home.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Profile(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
                             'assets/images/ic_profile.png',
                             width: 24,
                             height: 24,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),
-              ))
-            ],
-          )
+              ),
+            ),
+          ],
+        ),
 
-          // child: GestureDetector(
-          //   onTap: () async {
-          //     await context.read<AuthService>().signOut();
-          //     Alert.success(
-          //       context: context,
-          //       msg: "Log out success",
-          //     );
-          //   },
-          //   child: Container(
-          //     width: double.infinity,
-          //     padding: const EdgeInsets.all(11),
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xFFFE4545),
-          //       borderRadius: BorderRadius.circular(8),
-          //     ),
-          //     child: const Text(
-          //       "Logout",
-          //       textAlign: TextAlign.center,
-          //       style: TextStyle(
-          //         fontSize: 17,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          ),
+        // child: GestureDetector(
+        //   onTap: () async {
+        //     await context.read<AuthService>().signOut();
+        //     Alert.success(
+        //       context: context,
+        //       msg: "Log out success",
+        //     );
+        //   },
+        //   child: Container(
+        //     width: double.infinity,
+        //     padding: const EdgeInsets.all(11),
+        //     decoration: BoxDecoration(
+        //       color: const Color(0xFFFE4545),
+        //       borderRadius: BorderRadius.circular(8),
+        //     ),
+        //     child: const Text(
+        //       "Logout",
+        //       textAlign: TextAlign.center,
+        //       style: TextStyle(
+        //         fontSize: 17,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+      ),
     );
   }
 }

@@ -67,7 +67,7 @@ class _AddPetState extends State<AddPet> {
                 ),
                 child: Column(
                   children: [
-                    Image.asset("assets/heart.png"),
+                    Image.asset("assets/images/heart.png"),
                     const SizedBox(
                       height: 10,
                     ),

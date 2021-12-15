@@ -59,6 +59,8 @@ dependencies:
   permission_handler: ^8.3.0
   # for iamge cache
   cached_network_image: ^3.2.0
+  # number formating
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -83,12 +85,8 @@ flutter:
   uses-material-design: true
 
   assets:
-<<<<<<< HEAD
-    - assets/
-=======
     - assets/images/
 
->>>>>>> f705cea150e7d67992d764492a56ee706cbcba57
 
   # An image assets can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

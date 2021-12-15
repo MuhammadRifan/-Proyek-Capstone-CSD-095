@@ -81,7 +81,7 @@ class _AddUserDataState extends State<AddUserData> {
                 ),
                 child: Column(
                   children: [
-                    Image.asset("assets/heart.png"),
+                    Image.asset("assets/images/heart.png"),
                     const SizedBox(
                       height: 10,
                     ),
@@ -288,29 +288,29 @@ class _AddUserDataState extends State<AddUserData> {
                                   var userData =
                                       context.read<AuthService>().userData;
 
-                                  // await context
-                                  //     .read<UserDatabaseService>()
-                                  //     .updateUserData(
-                                  //       uid: userData!.uid,
-                                  //       name: _ctrlName.text,
-                                  //       phone: _ctrlPhone.text,
-                                  //       picture: _image!,
-                                  //       address: _ctrlAdress.text,
-                                  //       strv: (_checkDoctor)
-                                  //           ? _ctrlStrv.text
-                                  //           : "0",
-                                  //       jenis: (_checkDoctor) ? 1 : 0,
-                                  //     );
                                   await context
                                       .read<UserDatabaseService>()
-                                      .checkUserData(userData!.uid)
-                                      .then(
-                                    (DocumentSnapshot documentSnapshot) {
-                                      var data =
-                                          json.encode(documentSnapshot.data);
-                                      log(data[0]);
-                                    },
-                                  );
+                                      .updateUserData(
+                                        uid: userData!.uid,
+                                        name: _ctrlName.text,
+                                        phone: _ctrlPhone.text,
+                                        picture: _image!,
+                                        address: _ctrlAdress.text,
+                                        strv: (_checkDoctor)
+                                            ? _ctrlStrv.text
+                                            : "0",
+                                        jenis: (_checkDoctor) ? 1 : 0,
+                                      );
+                                  // await context
+                                  //     .read<UserDatabaseService>()
+                                  //     .checkUserData(userData!.uid)
+                                  //     .then(
+                                  //   (DocumentSnapshot documentSnapshot) {
+                                  //     var data =
+                                  //         json.encode(documentSnapshot.data);
+                                  //     log(data[0]);
+                                  //   },
+                                  // );
 
                                   setState(() => _loading = false);
                                   log("message");

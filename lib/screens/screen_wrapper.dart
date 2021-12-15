@@ -3,7 +3,8 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:petto/screens/home/list_clinic.dart';
+import 'package:petto/screens/home/home.dart';
+import 'package:petto/screens/vet_care/list_vet_care.dart';
 import 'package:petto/screens/pet/add_pet.dart';
 import 'package:petto/screens/user/add_user_data.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../core/services/user_db_service.dart';
 import '../core/widget/flushbar.dart';
 import 'auth/login.dart';
-import 'home/list_clinic.dart';
+import 'vet_care/list_vet_care.dart';
 
 class ScreenWrapper extends StatelessWidget {
   const ScreenWrapper({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class ScreenWrapper extends StatelessWidget {
         //     context.read<UserDatabaseService>().cekUserData(user.uid);
         // log(cek);
         log("message");
-        return ListClinic();
+        return Home();
         // log(data.toString());
         // FutureBuilder<String>(
         //   future: data,

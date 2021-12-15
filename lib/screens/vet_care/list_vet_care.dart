@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/widget/text_fied.dart';
+import 'vet_care_detail.dart';
 
-class ListClinic extends StatefulWidget {
-  const ListClinic({Key? key}) : super(key: key);
+class ListVetCare extends StatefulWidget {
+  const ListVetCare({Key? key}) : super(key: key);
 
   @override
-  State<ListClinic> createState() => _ListClinicState();
+  State<ListVetCare> createState() => _ListVetCareState();
 }
 
-class _ListClinicState extends State<ListClinic> {
+class _ListVetCareState extends State<ListVetCare> {
   final _ctrlSearch = TextEditingController();
 
   final _focusNodeSearch = FocusNode();
@@ -53,6 +54,106 @@ class _ListClinicState extends State<ListClinic> {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VetCareDetail(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(18),
+                          child: Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: "http://via.placeholder.com/350x150",
+                                progressIndicatorBuilder:
+                                    (context, _, progress) => Container(
+                                  color: const Color(0xFFFFA1A1),
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 25,
+                                      height: 25,
+                                      child: CircularProgressIndicator(
+                                        value: progress.progress,
+                                        color: Colors.red.shade900,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                errorWidget: (context, _, error) =>
+                                    const Icon(Icons.error),
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width * 0.30,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.30,
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFA68F3E),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(25),
+                                  ),
+                                ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 5, 13, 7),
+                                child: Row(
+                                  children: const [
+                                    Icon(
+                                      Icons.star_rate_rounded,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "3.5",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 15, 0, 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Vet Care",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  "Bandung, Jawa Barat",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,7 +166,7 @@ class _ListClinicState extends State<ListClinic> {
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
                                   (context, _, progress) => Container(
-                                color: const Color(0xFFFFA1A1),
+                                color: Color(0xFFFFA1A1),
                                 child: Center(
                                   child: SizedBox(
                                     width: 25,
@@ -80,8 +181,8 @@ class _ListClinicState extends State<ListClinic> {
                               errorWidget: (context, _, error) =>
                                   const Icon(Icons.error),
                               fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              height: MediaQuery.of(context).size.width * 0.30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
@@ -149,14 +250,6 @@ class _ListClinicState extends State<ListClinic> {
                         child: Stack(
                           alignment: Alignment.topRight,
                           children: [
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.35,
-                            //   height: MediaQuery.of(context).size.width * 0.35,
-                            //   // decoration: BoxDecoration(
-                            //   color: Colors.blue,
-                            //   //   borderRadius: BorderRadius.circular(20),
-                            //   // ),
-                            // ),
                             CachedNetworkImage(
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
@@ -176,8 +269,8 @@ class _ListClinicState extends State<ListClinic> {
                               errorWidget: (context, _, error) =>
                                   const Icon(Icons.error),
                               fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              height: MediaQuery.of(context).size.width * 0.30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
@@ -245,14 +338,6 @@ class _ListClinicState extends State<ListClinic> {
                         child: Stack(
                           alignment: Alignment.topRight,
                           children: [
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.35,
-                            //   height: MediaQuery.of(context).size.width * 0.35,
-                            //   // decoration: BoxDecoration(
-                            //   color: Colors.blue,
-                            //   //   borderRadius: BorderRadius.circular(20),
-                            //   // ),
-                            // ),
                             CachedNetworkImage(
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
@@ -272,8 +357,8 @@ class _ListClinicState extends State<ListClinic> {
                               errorWidget: (context, _, error) =>
                                   const Icon(Icons.error),
                               fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              height: MediaQuery.of(context).size.width * 0.30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
@@ -341,14 +426,6 @@ class _ListClinicState extends State<ListClinic> {
                         child: Stack(
                           alignment: Alignment.topRight,
                           children: [
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.35,
-                            //   height: MediaQuery.of(context).size.width * 0.35,
-                            //   // decoration: BoxDecoration(
-                            //   color: Colors.blue,
-                            //   //   borderRadius: BorderRadius.circular(20),
-                            //   // ),
-                            // ),
                             CachedNetworkImage(
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
@@ -368,8 +445,8 @@ class _ListClinicState extends State<ListClinic> {
                               errorWidget: (context, _, error) =>
                                   const Icon(Icons.error),
                               fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              height: MediaQuery.of(context).size.width * 0.30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
@@ -437,14 +514,6 @@ class _ListClinicState extends State<ListClinic> {
                         child: Stack(
                           alignment: Alignment.topRight,
                           children: [
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.35,
-                            //   height: MediaQuery.of(context).size.width * 0.35,
-                            //   // decoration: BoxDecoration(
-                            //   color: Colors.blue,
-                            //   //   borderRadius: BorderRadius.circular(20),
-                            //   // ),
-                            // ),
                             CachedNetworkImage(
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
@@ -464,104 +533,8 @@ class _ListClinicState extends State<ListClinic> {
                               errorWidget: (context, _, error) =>
                                   const Icon(Icons.error),
                               fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFA68F3E),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(25),
-                                ),
-                              ),
-                              padding: const EdgeInsets.fromLTRB(15, 5, 13, 7),
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.star_rate_rounded,
-                                    size: 18,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "3.5",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 15, 0, 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Vet Care",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                "Bandung, Jawa Barat",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(18),
-                        child: Stack(
-                          alignment: Alignment.topRight,
-                          children: [
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.35,
-                            //   height: MediaQuery.of(context).size.width * 0.35,
-                            //   // decoration: BoxDecoration(
-                            //   color: Colors.blue,
-                            //   //   borderRadius: BorderRadius.circular(20),
-                            //   // ),
-                            // ),
-                            CachedNetworkImage(
-                              imageUrl: "http://via.placeholder.com/350x150",
-                              progressIndicatorBuilder:
-                                  (context, _, progress) => Container(
-                                color: Color(0xFFFFA1A1),
-                                child: Center(
-                                  child: SizedBox(
-                                    width: 25,
-                                    height: 25,
-                                    child: CircularProgressIndicator(
-                                      value: progress.progress,
-                                      color: Colors.red.shade900,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              errorWidget: (context, _, error) =>
-                                  const Icon(Icons.error),
-                              fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              height: MediaQuery.of(context).size.width * 0.30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
