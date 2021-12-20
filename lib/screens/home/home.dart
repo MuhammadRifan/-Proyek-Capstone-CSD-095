@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:petto/screens/vet_care/add_vet_care.dart';
 import '../../core/widget/behavior.dart';
 import '../pet/add_pet.dart';
 import '../vet_care/list_vet_care.dart';
@@ -85,20 +86,28 @@ class Home extends StatelessWidget {
                             height: 10,
                           ),
                           GestureDetector(
-                            onTap: (){
-
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddVetCare(),
+                                ),
+                              );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 111,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 60),
                                     child: Image.asset(
                                       'assets/images/ic_heart.png',
                                       width: 32,
@@ -106,11 +115,13 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 20
-                                      ),
-                                      child: Text('Pet data',
-                                      style: GoogleFonts.roboto(fontSize: 18) ,)),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    child: Text(
+                                      'Pet data',
+                                      style: GoogleFonts.roboto(fontSize: 18),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -119,20 +130,28 @@ class Home extends StatelessWidget {
                             height: 10,
                           ),
                           GestureDetector(
-                            onTap: (){
-
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListVetCare(),
+                                ),
+                              );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 111,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 60),
                                     child: Image.asset(
                                       'assets/images/ic_medic.png',
                                       width: 32,
@@ -140,11 +159,13 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20
-                                      ),
-                                      child: Text('Vet Care',
-                                      style: GoogleFonts.roboto(fontSize: 18) ,)),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    child: Text(
+                                      'Vet Care',
+                                      style: GoogleFonts.roboto(fontSize: 18),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -245,12 +266,12 @@ class Home extends StatelessWidget {
                                   ),
                                   Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Drh.Mirza',
                                         style:
-                                        GoogleFonts.poppins(fontSize: 16),
+                                            GoogleFonts.poppins(fontSize: 16),
                                       ),
                                       SizedBox(
                                         height: 4,
@@ -261,31 +282,30 @@ class Home extends StatelessWidget {
                                           fontSize: 10,
                                           color: Colors.grey,
                                         ),
-                                      )
+                                      ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
-              ))
-            ],
-          )
-          ),
+              ),
+            ),
+          ],
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       floatingActionButton: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GestureDetector(
-              onTap: (){
-
-              },
+              onTap: () {},
               child: Image.asset(
                 'assets/images/ic_notif.png',
                 width: 24,
@@ -293,9 +313,7 @@ class Home extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: (){
-
-              },
+              onTap: () {},
               child: Image.asset(
                 'assets/images/ic_home.png',
                 width: 24,
@@ -303,8 +321,13 @@ class Home extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: (){
-
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  ),
+                );
               },
               child: Image.asset(
                 'assets/images/ic_profile.png',
