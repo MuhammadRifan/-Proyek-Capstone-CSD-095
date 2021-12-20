@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petto/core/services/auth_service.dart';
 import 'package:petto/core/widget/flushbar.dart';
-import 'package:petto/screens/appointment/list_appoinment.dart';
+import 'package:petto/screens/appointment/list_appointment.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {

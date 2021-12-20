@@ -166,7 +166,7 @@ class _ListVetCareState extends State<ListVetCare> {
                               imageUrl: "http://via.placeholder.com/350x150",
                               progressIndicatorBuilder:
                                   (context, _, progress) => Container(
-                                color: Color(0xFFFFA1A1),
+                                color: const Color(0xFFFFA1A1),
                                 child: Center(
                                   child: SizedBox(
                                     width: 25,
