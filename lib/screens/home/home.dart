@@ -1,12 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:petto/screens/vet_care/add_vet_care.dart';
+import 'package:petto/screens/appointment/list_appointment.dart';
+import 'package:petto/screens/pet/add_pet.dart';
+
 import '../../core/widget/behavior.dart';
-import '../pet/add_pet.dart';
+import '../vet_care/add_vet_care.dart';
 import '../vet_care/list_vet_care.dart';
 import 'profile.dart';
 
@@ -39,23 +38,35 @@ class Home extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/images/userpic.png',
-                                width: 52,
-                                fit: BoxFit.cover,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: Text(
-                                  "Hallo,Wong",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 18,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Profile(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/userpic.png',
+                                  width: 52,
+                                  fit: BoxFit.cover,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                  ),
+                                  child: Text(
+                                    "Hallo,Wong",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 30,
@@ -66,23 +77,26 @@ class Home extends StatelessWidget {
                               fontSize: 20,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Card(
                             elevation: 5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const [
                                 CupertinoSearchTextField(),
                               ],
                             ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           Text(
                             'Browse by Category',
                             style: GoogleFonts.poppins(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           GestureDetector(
@@ -90,14 +104,14 @@ class Home extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddVetCare(),
+                                  builder: (context) => const ListAppointment(),
                                 ),
                               );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 111,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(20),
@@ -107,7 +121,8 @@ class Home extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 60),
+                                      horizontal: 60,
+                                    ),
                                     child: Image.asset(
                                       'assets/images/ic_heart.png',
                                       width: 32,
@@ -115,10 +130,11 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
                                     child: Text(
-                                      'Pet data',
+                                      'Appointments',
                                       style: GoogleFonts.roboto(fontSize: 18),
                                     ),
                                   ),
@@ -126,7 +142,7 @@ class Home extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           GestureDetector(
@@ -134,14 +150,14 @@ class Home extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ListVetCare(),
+                                  builder: (context) => const ListVetCare(),
                                 ),
                               );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 111,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(20),
@@ -151,7 +167,8 @@ class Home extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 60),
+                                      horizontal: 60,
+                                    ),
                                     child: Image.asset(
                                       'assets/images/ic_medic.png',
                                       width: 32,
@@ -159,8 +176,9 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
                                     child: Text(
                                       'Vet Care',
                                       style: GoogleFonts.roboto(fontSize: 18),
@@ -170,14 +188,60 @@ class Home extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AddVetCare(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 111,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 60,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/ic_medic.png',
+                                      width: 32,
+                                      height: 32,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    child: Text(
+                                      'My Vet Care',
+                                      style: GoogleFonts.roboto(fontSize: 18),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
                             height: 20,
                           ),
                           Text(
                             'Our top Veterinary',
                             style: GoogleFonts.poppins(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Column(
@@ -189,7 +253,7 @@ class Home extends StatelessWidget {
                                     width: 52,
                                     height: 52,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Column(
@@ -201,7 +265,7 @@ class Home extends StatelessWidget {
                                         style:
                                             GoogleFonts.poppins(fontSize: 16),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 4,
                                       ),
                                       Text(
@@ -215,7 +279,7 @@ class Home extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -225,7 +289,7 @@ class Home extends StatelessWidget {
                                     width: 52,
                                     height: 52,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Column(
@@ -237,7 +301,7 @@ class Home extends StatelessWidget {
                                         style:
                                             GoogleFonts.poppins(fontSize: 16),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 4,
                                       ),
                                       Text(
@@ -251,7 +315,7 @@ class Home extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -261,7 +325,7 @@ class Home extends StatelessWidget {
                                     width: 52,
                                     height: 52,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Column(
@@ -273,7 +337,7 @@ class Home extends StatelessWidget {
                                         style:
                                             GoogleFonts.poppins(fontSize: 16),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 4,
                                       ),
                                       Text(
@@ -299,45 +363,43 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                'assets/images/ic_notif.png',
-                width: 24,
-                height: 24,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                'assets/images/ic_home.png',
-                width: 24,
-                height: 24,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Profile(),
-                  ),
-                );
-              },
-              child: Image.asset(
-                'assets/images/ic_profile.png',
-                width: 24,
-                height: 24,
-              ),
-            ),
-          ],
-        ),
-      ),
+      // resizeToAvoidBottomInset: false,
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   children: [
+      //     GestureDetector(
+      //       onTap: () {},
+      //       child: Image.asset(
+      //         'assets/images/ic_notif.png',
+      //         width: 24,
+      //         height: 24,
+      //       ),
+      //     ),
+      //     GestureDetector(
+      //       onTap: () {},
+      //       child: Image.asset(
+      //         'assets/images/ic_home.png',
+      //         width: 24,
+      //         height: 24,
+      //       ),
+      //     ),
+      //     GestureDetector(
+      //       onTap: () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //             builder: (context) => const Profile(),
+      //           ),
+      //         );
+      //       },
+      //       child: Image.asset(
+      //         'assets/images/ic_profile.png',
+      //         width: 24,
+      //         height: 24,
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

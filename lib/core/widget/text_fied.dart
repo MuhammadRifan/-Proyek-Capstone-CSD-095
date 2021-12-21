@@ -122,7 +122,7 @@ class FieldInput extends StatelessWidget {
             ]
           : null,
       onFieldSubmitted: onSubmitted,
-      textInputAction: (canNext) ? TextInputAction.next : null,
+      textInputAction: (canNext) ? TextInputAction.next : TextInputAction.done,
       validator: validator,
     );
   }
@@ -183,6 +183,7 @@ class _FieldSearchState extends State<FieldSearch> {
         fillColor: Colors.white,
         contentPadding: EdgeInsets.zero,
       ),
+      textInputAction: TextInputAction.search,
       onSubmitted: widget.onSubmitted,
       onChanged: (str) => setState(() {}),
     );
@@ -269,7 +270,9 @@ class FieldDateTime extends StatelessWidget {
                     ? dateFormat
                     : (timeFormat != null)
                         ? timeFormat
-                        : "YYYY-MM-DD"
+                        : (timeInput)
+                            ? "HH:mm"
+                            : "YYYY-MM-DD"
             : null,
         labelText: (!borderOutline)
             ? (hint != null)
@@ -278,7 +281,9 @@ class FieldDateTime extends StatelessWidget {
                     ? dateFormat
                     : (timeFormat != null)
                         ? timeFormat
-                        : "YYYY-MM-DD"
+                        : (timeInput)
+                            ? "HH:mm"
+                            : "YYYY-MM-DD"
             : null,
         contentPadding: (!borderOutline)
             ? const EdgeInsets.symmetric(

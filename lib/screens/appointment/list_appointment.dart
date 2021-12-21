@@ -34,7 +34,7 @@ class ListAppointment extends StatelessWidget {
                   },
                 ),
                 title: Text(
-                  "My Appointment",
+                  "Appointments",
                   style: TextStyle(
                     color: Colors.grey.shade900,
                   ),
@@ -59,6 +59,7 @@ class ListAppointment extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => AppointmentDetail(
                                 status: 0,
+                                rating: 0,
                               ),
                             ),
                           );
@@ -77,6 +78,7 @@ class ListAppointment extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => AppointmentDetail(
                                 status: 1,
+                                rating: 0,
                               ),
                             ),
                           );
@@ -95,6 +97,7 @@ class ListAppointment extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => AppointmentDetail(
                                 status: 2,
+                                rating: 4,
                               ),
                             ),
                           );
@@ -113,6 +116,7 @@ class ListAppointment extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => AppointmentDetail(
                                 status: -1,
+                                rating: 0,
                               ),
                             ),
                           );
