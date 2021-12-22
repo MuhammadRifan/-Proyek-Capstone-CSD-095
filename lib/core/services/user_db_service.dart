@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:petto/core/models/user_model.dart';
+import 'package:petto/core/services/auth_service.dart';
 
 import 'storage_service.dart';
 
@@ -33,13 +37,9 @@ class UserDatabaseService {
     required String? strv,
     required int jenis,
   }) async {
-    // String url = "null";
-
-    // if (picture != null) {
-      String url = await StorageService(
-        firebaseStorage: FirebaseStorage.instance,
-      ).uploadImage(picture);
-    // }
+    String url = await StorageService(
+      firebaseStorage: FirebaseStorage.instance,
+    ).uploadImage(picture);
 
     return await userCollection.doc(uid).set({
       'uid': uid,
@@ -54,13 +54,29 @@ class UserDatabaseService {
 
   Future<DocumentSnapshot> checkUserData(String uId) async {
     return await userCollection.doc(uId).get();
-    // try {
-    // } on FirebaseException catch (e) {
-    //   return e.message;
-    // }
   }
 
-  // Future<DocumentSnapshot> cekUserData(String uid) {
-  //   return userCollection.doc(uid).get();
+  Future<QuerySnapshot> dataDoctor() async {
+    return await userCollection.where('jenis', isEqualTo: 1).get();
+  }
+
+  // Stream<UserModel?> streamUserData() {
+  //   var user = AuthService(auth: FirebaseAuth.instance);
+  //   var uid = user.userData!.uid;
+
+  //   return userCollection.doc(uid).snapshots().map(
+  //         (data) => UserModel(
+  //           uid: uid,
+  //           name: data['name'],
+  //           phone: data['phone'],
+  //           picture: data['picture'],
+  //           address: data['address'],
+  //           strv: data['strv'],
+  //           jenis: data['jenis'],
+  //         ),
+  //       );
+  // log(UserModel(data));
+
+  // return userCollection.doc(uid).snapshots();
   // }
 }

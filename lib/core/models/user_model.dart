@@ -6,7 +6,7 @@ class UserModel {
     required this.picture,
     required this.address,
     required this.strv,
-    required this.level,
+    required this.jenis,
   });
 
   final String uid;
@@ -15,5 +15,5 @@ class UserModel {
   final String picture;
   final String address;
   final String strv;
-  final int level;
+  final int jenis;
 }

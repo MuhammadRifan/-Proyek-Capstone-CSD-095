@@ -6,11 +6,11 @@ import '../helper/custom_error.dart';
 class AuthService {
   AuthService({
     required this.auth,
-    required this.googleSignIn,
+    this.googleSignIn,
   });
 
   final FirebaseAuth auth;
-  final GoogleSignIn googleSignIn;
+  final GoogleSignIn? googleSignIn;
 
   Stream<User?> get authStateChanges => auth.userChanges();
 
@@ -32,7 +32,7 @@ class AuthService {
   Future signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
-          await googleSignIn.signIn();
+          await googleSignIn!.signIn();
 
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
@@ -73,8 +73,8 @@ class AuthService {
 
   Future signOut() async {
     try {
-      if (await googleSignIn.isSignedIn()) {
-        await googleSignIn.signOut();
+      if (await googleSignIn!.isSignedIn()) {
+        await googleSignIn!.signOut();
       }
       return await auth.signOut();
     } on FirebaseAuthException catch (e) {

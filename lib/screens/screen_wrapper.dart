@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ class ScreenWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<User?>();
+    log(user.toString());
 
     if (user != null) {
       if (!user.emailVerified) {
@@ -38,7 +41,9 @@ class ScreenWrapper extends StatelessWidget {
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data!.exists) {
-                return const Home();
+                return Home(
+                  uid: user.uid,
+                );
               } else {
                 return const AddUserData();
               }

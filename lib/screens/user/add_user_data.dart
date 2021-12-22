@@ -1,14 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:petto/screens/home/home.dart';
-import 'package:petto/screens/screen_wrapper.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/helper/permission.dart';
@@ -17,6 +12,7 @@ import '../../core/services/user_db_service.dart';
 import '../../core/widget/crop_image.dart';
 import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
+import '../screen_wrapper.dart';
 
 class AddUserData extends StatefulWidget {
   const AddUserData({Key? key}) : super(key: key);

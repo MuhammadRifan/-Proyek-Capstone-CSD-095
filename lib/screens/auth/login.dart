@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:petto/core/services/user_db_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/services/auth_service.dart';
@@ -163,7 +159,7 @@ class _LoginState extends State<Login> {
                                         msg: register.toString(),
                                       );
                                     }
-                                    
+
                                     setState(() => _loading = false);
                                   }
                                 },

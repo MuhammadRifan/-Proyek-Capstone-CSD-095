@@ -81,6 +81,7 @@ class VetCareDetail extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (_ctrlDate.text.isEmpty) {
+                      // ignore: void_checks
                       return Alert.error(
                         context: context,
                         msg: "Please choose a date",
@@ -88,6 +89,7 @@ class VetCareDetail extends StatelessWidget {
                     }
 
                     if (_ctrlTime.text.isEmpty) {
+                      // ignore: void_checks
                       return Alert.error(
                         context: context,
                         msg: "Please choose a time",
@@ -229,7 +231,7 @@ class VetCareDetail extends StatelessWidget {
                         const SizedBox(width: 5),
                         const Expanded(
                           child: Text(
-                            "Jalan. Diponegoro" + ", " + "Surabaya",
+                            "Jalan. Diponegoro, Surabaya",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,

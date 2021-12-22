@@ -1,15 +1,15 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:petto/core/helper/permission.dart';
-import 'package:petto/core/widget/button.dart';
-import 'package:petto/core/widget/crop_image.dart';
-import 'package:petto/core/widget/flushbar.dart';
-import 'package:petto/core/widget/text_fied.dart';
+
+import '../../core/helper/permission.dart';
+import '../../core/widget/button.dart';
+import '../../core/widget/crop_image.dart';
+import '../../core/widget/flushbar.dart';
+import '../../core/widget/text_fied.dart';
 
 class AddVetCare extends StatefulWidget {
   const AddVetCare({Key? key}) : super(key: key);
