@@ -44,6 +44,7 @@ class AuthService {
 
       UserCredential result = await auth.signInWithCredential(credential);
       User user = result.user!;
+
       return user;
     } on FirebaseAuthException catch (e) {
       return e.message;

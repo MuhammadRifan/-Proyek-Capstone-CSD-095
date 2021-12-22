@@ -4,16 +4,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:petto/core/services/storage_service.dart';
-import 'package:petto/core/services/user_db_service.dart';
 import 'package:provider/provider.dart';
 
+// import 'core/injection/injection.dart' as di;
 import 'core/services/auth_service.dart';
+import 'core/services/storage_service.dart';
+import 'core/services/user_db_service.dart';
 import 'screens/screen_wrapper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // await di.init();
 
   runApp(const MyApp());
 }

@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:petto/core/services/auth_service.dart';
+import 'package:petto/core/services/user_db_service.dart';
 import 'package:petto/core/widget/flushbar.dart';
 import 'package:petto/screens/appointment/list_appointment.dart';
 import 'package:provider/provider.dart';
@@ -143,18 +146,30 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                     ),
-                    const ProfileWidget(
-                      text: 'Rate App',
-                      icon: Icons.star,
+                    GestureDetector(
+                      onTap: () async {
+                        var user = context.read<AuthService>().userData;
+                        var test = await context
+                            .read<UserDatabaseService>()
+                            .checkUserData(user!.uid);
+                        log(test.data().toString());
+                      },
+                      child: const ProfileWidget(
+                        text: 'Rate App',
+                        icon: Icons.star,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () async {
                         await context.read<AuthService>().signOut();
-                        // Alert.success(
-                        //   context: context,
-                        //   msg: "Log out success",
-                        // );
+
+                        Navigator.pop(context);
+
+                        Alert.success(
+                          context: context,
+                          msg: "Log out success",
+                        );
                       },
                       child: const ProfileWidget(
                         text: 'Log Out',

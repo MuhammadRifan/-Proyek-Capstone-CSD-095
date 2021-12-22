@@ -30,12 +30,16 @@ class UserDatabaseService {
     required String phone,
     required File picture,
     required String address,
-    required String strv,
+    required String? strv,
     required int jenis,
   }) async {
-    String url = await StorageService(
-      firebaseStorage: FirebaseStorage.instance,
-    ).uploadImage(picture);
+    // String url = "null";
+
+    // if (picture != null) {
+      String url = await StorageService(
+        firebaseStorage: FirebaseStorage.instance,
+      ).uploadImage(picture);
+    // }
 
     return await userCollection.doc(uid).set({
       'uid': uid,
@@ -56,7 +60,7 @@ class UserDatabaseService {
     // }
   }
 
-  Future<DocumentSnapshot> cekUserData(String uid) {
-    return userCollection.doc(uid).get();
-  }
+  // Future<DocumentSnapshot> cekUserData(String uid) {
+  //   return userCollection.doc(uid).get();
+  // }
 }

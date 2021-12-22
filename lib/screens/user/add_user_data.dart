@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:petto/screens/home/home.dart';
+import 'package:petto/screens/screen_wrapper.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/helper/permission.dart';
@@ -298,22 +300,18 @@ class _AddUserDataState extends State<AddUserData> {
                                         address: _ctrlAdress.text,
                                         strv: (_checkDoctor)
                                             ? _ctrlStrv.text
-                                            : "0",
+                                            : null,
                                         jenis: (_checkDoctor) ? 1 : 0,
                                       );
-                                  // await context
-                                  //     .read<UserDatabaseService>()
-                                  //     .checkUserData(userData!.uid)
-                                  //     .then(
-                                  //   (DocumentSnapshot documentSnapshot) {
-                                  //     var data =
-                                  //         json.encode(documentSnapshot.data);
-                                  //     log(data[0]);
-                                  //   },
-                                  // );
+
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ScreenWrapper(),
+                                    ),
+                                  );
 
                                   setState(() => _loading = false);
-                                  log("message");
                                 }
                               },
                               child: Container(
