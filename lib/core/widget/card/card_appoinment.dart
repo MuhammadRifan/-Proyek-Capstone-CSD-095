@@ -1,25 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../helper/string_helper.dart';
+import '../../services/vet_care_db_service.dart';
 
 // ignore: must_be_immutable
 class CardAppointment extends StatelessWidget {
   CardAppointment({
     Key? key,
-    required this.imgUrl,
-    required this.vetCare,
     required this.date,
     required this.time,
     required this.status,
+    required this.uidVetCare,
     required this.onTap,
   }) : super(key: key);
 
-  final String imgUrl;
-  final String vetCare;
   final String date;
   final String time;
   final int status;
+  final String uidVetCare;
   final GestureTapCallback onTap;
 
   String statusText = "null";
@@ -30,7 +33,6 @@ class CardAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(date);
-    // String day = DateFormat("EEEE").format(dateTime);
     String dateFormat = DateFormat("dd MMM yyyy").format(dateTime);
 
     switch (status) {
@@ -86,89 +88,106 @@ class CardAppointment extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.horizontal(
-                left: Radius.circular(15),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: imgUrl,
-                placeholder: (context, url) => Container(
-                  color: Colors.black26,
-                  child: Center(
-                    child: SpinKitChasingDots(
-                      size: 25,
-                      color: Colors.red.shade900,
+        child: FutureBuilder<DocumentSnapshot>(
+          future: context
+              .read<VetCareDatabaseService>()
+              .dataVetCareDetail(uidVetCare),
+          builder: (_, snapshot) {
+            var imgUrl = StringHelper.defaultImage;
+            var vetCare = "-";
+
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data!.exists) {
+                imgUrl = snapshot.data!['picture'];
+                vetCare = snapshot.data!['name'];
+              }
+            }
+
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(15),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: imgUrl,
+                    placeholder: (context, url) => Container(
+                      color: Colors.black26,
+                      child: Center(
+                        child: SpinKitChasingDots(
+                          size: 25,
+                          color: Colors.red.shade900,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, _, error) => Container(
+                      color: Colors.black26,
+                      child: Icon(
+                        Icons.error_outline_rounded,
+                        size: 40,
+                        color: Colors.red.shade700,
+                      ),
+                    ),
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: MediaQuery.of(context).size.width * 0.25,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.width * 0.25,
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          vetCare,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          "$dateFormat, $time",
+                          maxLines: 1,
+                          style: const TextStyle(
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                        const Spacer(),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: backColor,
+                              border: Border.all(
+                                color: borderColor,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 5,
+                            ),
+                            child: Text(
+                              statusText,
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                errorWidget: (context, _, error) => Container(
-                  color: Colors.black26,
-                  child: Icon(
-                    Icons.error_outline_rounded,
-                    size: 40,
-                    color: Colors.red.shade700,
-                  ),
-                ),
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: MediaQuery.of(context).size.width * 0.25,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: MediaQuery.of(context).size.width * 0.25,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      vetCare,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      "$dateFormat, $time",
-                      maxLines: 1,
-                      style: const TextStyle(
-                        letterSpacing: 0.25,
-                      ),
-                    ),
-                    const Spacer(),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: backColor,
-                          border: Border.all(
-                            color: borderColor,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 5,
-                        ),
-                        child: Text(
-                          statusText,
-                          style: TextStyle(
-                            color: textColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
     );

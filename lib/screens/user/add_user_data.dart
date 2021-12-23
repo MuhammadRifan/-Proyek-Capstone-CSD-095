@@ -303,7 +303,8 @@ class _AddUserDataState extends State<AddUserData> {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const ScreenWrapper(),
+                                      builder: (context) =>
+                                          const ScreenWrapper(),
                                     ),
                                   );
 
@@ -311,6 +312,7 @@ class _AddUserDataState extends State<AddUserData> {
                                 }
                               },
                               child: Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFFF5C5C),
                                   borderRadius: BorderRadius.circular(24),
@@ -324,11 +326,13 @@ class _AddUserDataState extends State<AddUserData> {
                                         color: Colors.white,
                                         size: 25,
                                       )
-                                    : const Text(
-                                        "Save",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17,
+                                    : const Center(
+                                        child: Text(
+                                          "Save",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17,
+                                          ),
                                         ),
                                       ),
                               ),

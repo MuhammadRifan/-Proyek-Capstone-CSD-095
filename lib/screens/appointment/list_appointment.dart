@@ -1,11 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/services/appointment_db_service.dart';
 import '../../core/widget/card/card_appoinment.dart';
 import 'appointment_detail.dart';
 
-class ListAppointment extends StatelessWidget {
-  const ListAppointment({Key? key}) : super(key: key);
+class ListAppointment extends StatefulWidget {
+  const ListAppointment({
+    Key? key,
+    required this.uid,
+    required this.jenis,
+  }) : super(key: key);
 
+  final String uid;
+  final int jenis;
+
+  @override
+  State<ListAppointment> createState() => _ListAppointmentState();
+}
+
+class _ListAppointmentState extends State<ListAppointment> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,85 +59,54 @@ class ListAppointment extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: Column(
-                    children: [
-                      CardAppointment(
-                        imgUrl: "http://via.placeholder.com/100x100",
-                        vetCare:
-                            "Occaecat amet minim Occaecat amet minim Occaecat amet minim",
-                        date: "2021-12-29",
-                        time: "15:00",
-                        status: 0,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppointmentDetail(
-                                status: 0,
-                                rating: 0,
+                  child: FutureBuilder<QuerySnapshot>(
+                    future: context
+                        .read<AppointmentDatabaseService>()
+                        .dataMyAppointment(
+                          widget.uid,
+                          widget.jenis,
+                        ),
+                    builder: (_, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.data!.size > 0) {
+                          return Column(
+                            children: snapshot.data!.docs
+                                .map(
+                                  (data) => CardAppointment(
+                                    date: data['date'],
+                                    time: data['time'],
+                                    status: data['status'],
+                                    uidVetCare: data['uidVetCare'],
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AppointmentDetail(
+                                            uid: data.id,
+                                            jenis: widget.jenis,
+                                          ),
+                                        ),
+                                      ).then((value) => setState(() {}));
+                                    },
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        } else {
+                          return const Center(
+                            child: Text(
+                              "Data Not Found",
+                              style: TextStyle(
+                                fontSize: 20,
                               ),
                             ),
                           );
-                        },
-                      ),
-                      CardAppointment(
-                        imgUrl: "http://via.placeholder.com/500x500",
-                        vetCare:
-                            "Occaecat amet minim Occaecat amet minim Occaecat amet minim",
-                        date: "2021-12-16",
-                        time: "09:00",
-                        status: 1,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppointmentDetail(
-                                status: 1,
-                                rating: 0,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      CardAppointment(
-                        imgUrl: "http://via.placeholder.com/500x150",
-                        vetCare:
-                            "Occaecat amet minim Occaecat amet minim Occaecat amet minim",
-                        date: "2021-01-06",
-                        time: "10:00",
-                        status: 2,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppointmentDetail(
-                                status: 2,
-                                rating: 4,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      CardAppointment(
-                        imgUrl: "http://via.placeholder.com/200x250",
-                        vetCare:
-                            "Occaecat amet minim Occaecat amet minim Occaecat amet minim",
-                        date: "2021-10-25",
-                        time: "08:30",
-                        status: -1,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppointmentDetail(
-                                status: -1,
-                                rating: 0,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                        }
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
                   ),
                 ),
               ),

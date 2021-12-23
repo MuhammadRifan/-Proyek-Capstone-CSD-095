@@ -1,61 +1,82 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-
-import 'storage_service.dart';
 
 class AppointmentDatabaseService {
   AppointmentDatabaseService({
-    required this.userCollection,
+    required this.appointmentCollection,
   });
 
-  final CollectionReference userCollection;
+  final CollectionReference appointmentCollection;
 
-  // UserModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
-  //   return UserModel(
-  //     uid: snapshot.id,
-  //     name: snapshot.data()!['nama'],
-  //     phone: snapshot.data()['phone'],
-  //     picture: snapshot.data()['picture'],
-  //     address: snapshot.data()['address'],
-  //     strv: snapshot.data()['strv'],
-  //     level: snapshot.data()['level'],
-  //   );
-  // }
-
-  Future updateUserData({
-    required String uid,
-    required String id_klinik,
-    required String tanggal,
-    required String jam ,
+  Future addAppointment({
+    required String uidUser,
+    required String uidDoctor,
+    required String uidVetCare,
+    required String date,
+    required String time,
     required String note,
-    required String status,
+    required String nameVetCare,
+    required String pictureVetCare,
+    required int status,
     required double rating,
   }) async {
+    var realNote = "";
 
+    if (note.isEmpty) {
+      realNote = "-";
+    } else {
+      realNote = note;
+    }
 
-    return await userCollection.doc(uid).set({
-      'uid': uid,
-      'id_klinik' : id_klinik,
-      'date': tanggal,
-      'jam' : jam,
-      'note' : note,
-      'status' : status,
+    return await appointmentCollection.add({
+      'uidUser': uidUser,
+      'uidDoctor': uidDoctor,
+      'uidVetCare': uidVetCare,
+      'nameVetCare': nameVetCare,
+      'pictureVetCare': pictureVetCare,
+      'date': date,
+      'time': time,
+      'note': realNote,
+      'status': status,
       'rating': rating,
-
     });
   }
 
-  Future<DocumentSnapshot> checkUserData(String uId) async {
-    return await userCollection.doc(uId).get();
-    // try {
-    // } on FirebaseException catch (e) {
-    //   return e.message;
-    // }
+  Future<QuerySnapshot> dataMyAppointment(String uid, int jenis) async {
+    if (jenis == 0) {
+      return await appointmentCollection.where('uidUser', isEqualTo: uid).get();
+    } else {
+      return await appointmentCollection
+          .where('uidDoctor', isEqualTo: uid)
+          .get();
+    }
   }
 
-  Future<DocumentSnapshot> cekUserData(String uid) {
-    return userCollection.doc(uid).get();
+  Future<DocumentSnapshot> dataAppointmentDetail(String uId) async {
+    return await appointmentCollection.doc(uId).get();
+  }
+
+  Future<QuerySnapshot> dataRating(String uid) async {
+    return await appointmentCollection
+        .where('uidVetCare', isEqualTo: uid)
+        .get();
+  }
+
+  Future updateAppointmentStatus({
+    required String uid,
+    required int status,
+  }) async {
+    return await appointmentCollection.doc(uid).update({
+      'status': status,
+    });
+  }
+
+  Future ratingAppointment({
+    required String uid,
+    required double rating,
+  }) async {
+    return await appointmentCollection.doc(uid).update({
+      'status': 3,
+      'rating': rating,
+    });
   }
 }

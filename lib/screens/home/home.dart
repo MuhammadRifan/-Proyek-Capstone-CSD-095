@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:petto/core/models/user_model.dart';
-import 'package:petto/core/services/user_db_service.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/helper/string_helper.dart';
+import '../../core/services/user_db_service.dart';
 import '../../core/widget/behavior.dart';
 import '../appointment/list_appointment.dart';
 import '../vet_care/add_vet_care.dart';
@@ -17,16 +17,14 @@ class Home extends StatelessWidget {
   const Home({
     Key? key,
     required this.uid,
+    required this.jenis,
   }) : super(key: key);
 
   final String uid;
+  final int jenis;
 
   @override
   Widget build(BuildContext context) {
-    // var userData = context.read<UserDatabaseService>().checkUserData(uid);
-    String defaultImage =
-        "https://firebasestorage.googleapis.com/v0/b/petto-2fc47.appspot.com/o/image_user%2Fprofile.png?alt=media&token=8a3f2161-ef6c-4879-af9e-110a6b3ee789";
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -79,8 +77,8 @@ class Home extends StatelessWidget {
                                       userName: snapshot.data!['name'],
                                     );
                                   } else {
-                                    return RowProfile(
-                                      userPicture: defaultImage,
+                                    return const RowProfile(
+                                      userPicture: StringHelper.defaultUser,
                                       userName: "User",
                                     );
                                   }
@@ -106,7 +104,10 @@ class Home extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ListAppointment(),
+                                builder: (context) => ListAppointment(
+                                  uid: uid,
+                                  jenis: jenis,
+                                ),
                               ),
                             );
                           },
@@ -131,20 +132,42 @@ class Home extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CardMenu(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AddVetCare(),
-                              ),
-                            );
+                        FutureBuilder<DocumentSnapshot>(
+                          future: context
+                              .read<UserDatabaseService>()
+                              .checkUserData(uid),
+                          builder: (_, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.data!['jenis'] == 1) {
+                                return Column(
+                                  children: [
+                                    CardMenu(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AddVetCare(
+                                              uid: uid,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      iconAsset: 'assets/images/ic_medic.png',
+                                      title: "My Vet Care",
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            } else {
+                              return const SizedBox();
+                            }
                           },
-                          iconAsset: 'assets/images/ic_medic.png',
-                          title: "My Vet Care",
-                        ),
-                        const SizedBox(
-                          height: 20,
                         ),
                         FutureBuilder<QuerySnapshot>(
                           future:

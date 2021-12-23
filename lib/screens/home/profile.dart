@@ -1,12 +1,14 @@
-import 'dart:developer';
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:petto/core/services/auth_service.dart';
-import 'package:petto/core/services/user_db_service.dart';
-import 'package:petto/core/widget/flushbar.dart';
-import 'package:petto/screens/appointment/list_appointment.dart';
-import 'package:petto/screens/home/edit_profile.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/helper/string_helper.dart';
+import '../../core/services/auth_service.dart';
+import '../../core/services/user_db_service.dart';
+import '../../core/widget/flushbar.dart';
+import 'edit_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -18,110 +20,114 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    var user = context.read<AuthService>().userData;
+
     return Scaffold(
       backgroundColor: Colors.redAccent,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Icon(
-                      Icons.segment_sharp,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
               ),
-              const SizedBox(height: 12),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color(0xff7c94b6),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/userpic.png'),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(100.0),
-                  ),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 4.0,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 4,
-                      offset: const Offset(0, 5), // changes position of shadow
-                    ),
-                  ],
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: const Text(
+              "Profile",
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+          ),
+          FutureBuilder<DocumentSnapshot>(
+            future: context.read<UserDatabaseService>().checkUserData(
+                  user!.uid,
                 ),
-              ),
-              const SizedBox(height: 20),
-              Column(
-                children: const [
-                  Text('UserName'),
-                  Text('Email'),
-                ],
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 20, bottom: 10),
-                  child: const Divider(
-                    color: Colors.white,
-                    thickness: 4,
-                    indent: 5,
-                    endIndent: 5,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
+            builder: (_, snapshot) {
+              var userName = "username";
+              var image = StringHelper.defaultUser;
+
+              if (snapshot.connectionState == ConnectionState.done) {
+                userName = snapshot.data!['name'];
+                image = snapshot.data!['picture'];
+              }
+
+              return SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EditProfile(),
+                    const SizedBox(height: 12),
+                    Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: const Color(0xff7c94b6),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(100.0),
+                        ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 4.0,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 4,
+                            offset: const Offset(
+                              0,
+                              5,
+                            ),
                           ),
-                        );
-                      },
-                      child: const ProfileWidget(
-                        text: 'Edit Profile',
-                        icon: Icons.settings,
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl: image,
+                          placeholder: (context, url) => Container(
+                            color: Colors.black26,
+                            child: Center(
+                              child: SpinKitChasingDots(
+                                size: 20,
+                                color: Colors.red.shade900,
+                              ),
+                            ),
+                          ),
+                          errorWidget: (context, _, error) => Container(
+                            color: Colors.black26,
+                            child: Icon(
+                              Icons.error_outline_rounded,
+                              size: 30,
+                              color: Colors.red.shade700,
+                            ),
+                          ),
+                          fit: BoxFit.cover,
+                          // width: 190,
+                          // height: 190,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-
+                    const SizedBox(height: 20),
+                    Column(
+                      children: [
+                        Text(
+                          userName,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          user.email!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                     Align(
                       alignment: Alignment.center,
                       child: Container(
@@ -134,30 +140,75 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                     ),
-
-                    const SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: () async {
-                        await context.read<AuthService>().signOut();
-
-                        Navigator.pop(context);
-
-                        Alert.success(
-                          context: context,
-                          msg: "Log out success",
-                        );
-                      },
-                      child: const ProfileWidget(
-                        text: 'Log Out',
-                        icon: Icons.logout_outlined,
+                    const SizedBox(height: 10),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 30,
                       ),
-                    ),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const EditProfile(),
+                                ),
+                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const AddUserData(),
+                              //   ),
+                              // );
+                            },
+                            child: const ProfileWidget(
+                              text: 'Edit Profile',
+                              icon: Icons.settings,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                                bottom: 10,
+                              ),
+                              child: const Divider(
+                                color: Colors.white,
+                                thickness: 4,
+                                indent: 5,
+                                endIndent: 5,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          GestureDetector(
+                            onTap: () async {
+                              await context.read<AuthService>().signOut();
+
+                              Navigator.pop(context);
+
+                              Alert.success(
+                                context: context,
+                                msg: "Log out success",
+                              );
+                            },
+                            child: const ProfileWidget(
+                              text: 'Log Out',
+                              icon: Icons.logout_outlined,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
+              );
+            },
           ),
-        ),
+        ],
       ),
     );
   }
@@ -203,7 +254,13 @@ class ProfileWidget extends StatelessWidget {
           icon,
           color: Colors.white,
         ),
-        Text(text),
+        Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+        ),
         const Icon(
           Icons.keyboard_arrow_right,
           color: Colors.white,

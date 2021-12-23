@@ -1,11 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:petto/core/models/user_model.dart';
-import 'package:petto/core/services/auth_service.dart';
 
 import 'storage_service.dart';
 
@@ -39,7 +35,7 @@ class UserDatabaseService {
   }) async {
     String url = await StorageService(
       firebaseStorage: FirebaseStorage.instance,
-    ).uploadImage(picture);
+    ).uploadImageUser(picture);
 
     return await userCollection.doc(uid).set({
       'uid': uid,

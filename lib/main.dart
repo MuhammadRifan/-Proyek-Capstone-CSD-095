@@ -4,12 +4,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:petto/core/services/appointment_db_service.dart';
 import 'package:provider/provider.dart';
 
 // import 'core/injection/injection.dart' as di;
 import 'core/services/auth_service.dart';
 import 'core/services/storage_service.dart';
 import 'core/services/user_db_service.dart';
+import 'core/services/vet_care_db_service.dart';
 import 'screens/screen_wrapper.dart';
 
 Future<void> main() async {
@@ -65,6 +67,22 @@ class ProviderWrapper extends StatelessWidget {
         Provider<UserDatabaseService>(
           create: (_) => UserDatabaseService(
             userCollection: FirebaseFirestore.instance.collection('users'),
+          ),
+        ),
+        // Vet Care Database
+        Provider<VetCareDatabaseService>(
+          create: (_) => VetCareDatabaseService(
+            vetCareCollection: FirebaseFirestore.instance.collection(
+              'vet_cares',
+            ),
+          ),
+        ),
+        // Appointment Database
+        Provider<AppointmentDatabaseService>(
+          create: (_) => AppointmentDatabaseService(
+            appointmentCollection: FirebaseFirestore.instance.collection(
+              'appointments',
+            ),
           ),
         ),
         // Storage
