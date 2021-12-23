@@ -125,7 +125,7 @@ class Home extends StatelessWidget {
                               ),
                             );
                           },
-                          iconAsset: 'assets/images/ic_medic.png',
+                          iconAsset: 'assets/images/ic_vetcare.png',
                           title: "Vet Care",
                         ),
                         const SizedBox(

@@ -5,6 +5,7 @@ import 'package:petto/core/services/auth_service.dart';
 import 'package:petto/core/services/user_db_service.dart';
 import 'package:petto/core/widget/flushbar.dart';
 import 'package:petto/screens/appointment/list_appointment.dart';
+import 'package:petto/screens/home/edit_profile.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
@@ -110,7 +111,7 @@ class _ProfileState extends State<Profile> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ListAppointment(),
+                            builder: (context) => const EditProfile(),
                           ),
                         );
                       },
@@ -120,20 +121,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const ProfileWidget(
-                      text: 'Help',
-                      icon: Icons.help,
-                    ),
-                    const SizedBox(height: 8),
-                    const ProfileWidget(
-                      text: 'Privacy & Policy',
-                      icon: Icons.privacy_tip,
-                    ),
-                    const SizedBox(height: 8),
-                    const ProfileWidget(
-                      text: 'Term of Service',
-                      icon: Icons.report,
-                    ),
+
                     Align(
                       alignment: Alignment.center,
                       child: Container(
@@ -146,19 +134,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () async {
-                        var user = context.read<AuthService>().userData;
-                        var test = await context
-                            .read<UserDatabaseService>()
-                            .checkUserData(user!.uid);
-                        log(test.data().toString());
-                      },
-                      child: const ProfileWidget(
-                        text: 'Rate App',
-                        icon: Icons.star,
-                      ),
-                    ),
+
                     const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () async {
