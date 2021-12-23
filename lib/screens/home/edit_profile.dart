@@ -16,18 +16,16 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile'),
-          leading: IconButton(
-  onPressed: () {},
-  icon: Icon(
-  Icons.arrow_back,
-  color: Colors.white,),
+          leading:
+            IconButton(
+                onPressed: () {
+                Navigator.pop(context);
+                },
+              icon: const Icon(
+              Icons.arrow_back,
+                color: Colors.white,
           ),
-        actions: [
-          IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.settings,
-                  color: Colors.white))
-        ],
+          ),
   ),
       body: Container(
         padding: EdgeInsets.only(left: 15,top: 20,right: 15),
