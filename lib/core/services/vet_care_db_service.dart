@@ -90,8 +90,10 @@ class VetCareDatabaseService {
     return await vetCareCollection.where('uidDoctor', isEqualTo: uid).get();
   }
 
-  Future<QuerySnapshot> dataVetCare() async {
-    return await vetCareCollection.get();
+  Future<QuerySnapshot> dataVetCare(String search) async {
+    return await vetCareCollection
+        .where('name', isGreaterThanOrEqualTo: search)
+        .get();
   }
 
   Future<DocumentSnapshot> dataVetCareDetail(String uId) async {

@@ -12,7 +12,6 @@ import '../../core/services/user_db_service.dart';
 import '../../core/widget/crop_image.dart';
 import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
-import '../screen_wrapper.dart';
 
 class AddUserData extends StatefulWidget {
   const AddUserData({

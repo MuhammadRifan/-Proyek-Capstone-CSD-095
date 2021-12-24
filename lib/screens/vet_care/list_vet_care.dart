@@ -21,6 +21,8 @@ class _ListVetCareState extends State<ListVetCare> {
 
   final _focusNodeSearch = FocusNode();
 
+  String _searchQuery = '';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,14 +69,16 @@ class _ListVetCareState extends State<ListVetCare> {
                         ctrl: _ctrlSearch,
                         focusNode: _focusNodeSearch,
                         onSubmitted: (val) {
-                          
+                          setState(() {
+                            _searchQuery = val;
+                          });
                         },
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 20),
                       FutureBuilder<QuerySnapshot>(
                         future: context
                             .read<VetCareDatabaseService>()
-                            .dataVetCare(),
+                            .dataVetCare(_searchQuery),
                         builder: (_, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
@@ -82,14 +86,20 @@ class _ListVetCareState extends State<ListVetCare> {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Recommended Vet Practice",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20),
+                                  (_searchQuery.isEmpty)
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 10,
+                                          ),
+                                          child: Text(
+                                            "Recommended Vet Practice",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
                                   Column(
                                     children: snapshot.data!.docs
                                         .map(
@@ -108,9 +118,11 @@ class _ListVetCareState extends State<ListVetCare> {
                             } else {
                               return const Center(
                                 child: Text(
-                                  "Data Not Found",
+                                  "Data Not Found\n\nValues Are Case Sensitive",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               );
