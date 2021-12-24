@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:petto/screens/user/add_user_data.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/helper/string_helper.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/user_db_service.dart';
 import '../../core/widget/flushbar.dart';
-import 'edit_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -152,15 +152,11 @@ class _ProfileState extends State<Profile> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EditProfile(),
+                                  builder: (context) => AddUserData(
+                                    uid: user.uid,
+                                  ),
                                 ),
-                              );
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const AddUserData(),
-                              //   ),
-                              // );
+                              ).then((value) => setState(() {}));
                             },
                             child: const ProfileWidget(
                               text: 'Edit Profile',

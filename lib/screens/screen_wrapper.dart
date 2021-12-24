@@ -43,7 +43,10 @@ class ScreenWrapper extends StatelessWidget {
                   jenis: snapshot.data!['jenis'],
                 );
               } else {
-                return const AddUserData();
+                return AddUserData(
+                  uid: user.uid,
+                  first: true,
+                );
               }
             } else {
               return const Login();

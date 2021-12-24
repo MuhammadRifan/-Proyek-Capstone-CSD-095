@@ -11,8 +11,9 @@ class VetCareDatabaseService {
   });
 
   final CollectionReference vetCareCollection;
-  final StorageService storageService =
-      StorageService(firebaseStorage: FirebaseStorage.instance);
+  final StorageService storageService = StorageService(
+    firebaseStorage: FirebaseStorage.instance,
+  );
 
   Future addVetCare({
     required String uidDoctor,

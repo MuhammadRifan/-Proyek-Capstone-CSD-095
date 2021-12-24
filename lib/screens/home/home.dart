@@ -13,7 +13,7 @@ import '../vet_care/add_vet_care.dart';
 import '../vet_care/list_vet_care.dart';
 import 'profile.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({
     Key? key,
     required this.uid,
@@ -23,6 +23,11 @@ class Home extends StatelessWidget {
   final String uid;
   final int jenis;
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +66,14 @@ class Home extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) => const Profile(),
                               ),
-                            );
+                            ).then((value) => setState(() {}));
                           },
                           child: Row(
                             children: [
                               FutureBuilder<DocumentSnapshot>(
                                 future: context
                                     .read<UserDatabaseService>()
-                                    .checkUserData(uid),
+                                    .checkUserData(widget.uid),
                                 builder: (_, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
@@ -105,8 +110,8 @@ class Home extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ListAppointment(
-                                  uid: uid,
-                                  jenis: jenis,
+                                  uid: widget.uid,
+                                  jenis: widget.jenis,
                                 ),
                               ),
                             );
@@ -135,7 +140,7 @@ class Home extends StatelessWidget {
                         FutureBuilder<DocumentSnapshot>(
                           future: context
                               .read<UserDatabaseService>()
-                              .checkUserData(uid),
+                              .checkUserData(widget.uid),
                           builder: (_, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
@@ -148,7 +153,7 @@ class Home extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => AddVetCare(
-                                              uid: uid,
+                                              uid: widget.uid,
                                             ),
                                           ),
                                         );
@@ -191,9 +196,16 @@ class Home extends StatelessWidget {
                                           .map(
                                             (data) => Row(
                                               children: [
-                                                RowTopDoctor(
-                                                  doctorImage: data['picture'],
-                                                  doctorName: data['name'],
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    bottom: 10,
+                                                  ),
+                                                  child: RowTopDoctor(
+                                                    doctorImage:
+                                                        data['picture'],
+                                                    doctorName: data['name'],
+                                                  ),
                                                 ),
                                               ],
                                             ),

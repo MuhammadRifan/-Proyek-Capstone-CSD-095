@@ -105,7 +105,10 @@ class _AddVetCareState extends State<AddVetCare> {
                   SliverToBoxAdapter(
                     child: Column(
                       children: [
-                        Image.asset("assets/images/heart.png"),
+                        Image.asset(
+                          "assets/images/ic_vetcare.png",
+                          scale: 3.5,
+                        ),
                         const SizedBox(
                           height: 10,
                         ),

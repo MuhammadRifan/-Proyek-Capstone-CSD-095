@@ -11,20 +11,11 @@ class UserDatabaseService {
   });
 
   final CollectionReference userCollection;
+  final StorageService storageService = StorageService(
+    firebaseStorage: FirebaseStorage.instance,
+  );
 
-  // UserModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
-  //   return UserModel(
-  //     uid: snapshot.id,
-  //     name: snapshot.data()!['nama'],
-  //     phone: snapshot.data()['phone'],
-  //     picture: snapshot.data()['picture'],
-  //     address: snapshot.data()['address'],
-  //     strv: snapshot.data()['strv'],
-  //     level: snapshot.data()['level'],
-  //   );
-  // }
-
-  Future updateUserData({
+  Future setUserData({
     required String uid,
     required String name,
     required String phone,
@@ -33,9 +24,7 @@ class UserDatabaseService {
     required String? strv,
     required int jenis,
   }) async {
-    String url = await StorageService(
-      firebaseStorage: FirebaseStorage.instance,
-    ).uploadImageUser(picture);
+    String url = await storageService.uploadImageUser(picture);
 
     return await userCollection.doc(uid).set({
       'uid': uid,
@@ -46,6 +35,39 @@ class UserDatabaseService {
       'strv': strv,
       'jenis': jenis,
     });
+  }
+
+  Future updateUserData({
+    required String uid,
+    required String name,
+    required String phone,
+    required String address,
+    required String? strv,
+    required String oldPicture,
+    File? picture,
+  }) async {
+    if (picture != null) {
+      String url = await storageService.uploadImageUser(picture);
+
+      await storageService.deleteImage(oldPicture);
+
+      return await userCollection.doc(uid).update({
+        'uid': uid,
+        'name': name,
+        'phone': phone,
+        'picture': url,
+        'address': address,
+        'strv': strv,
+      });
+    } else {
+      return await userCollection.doc(uid).update({
+        'uid': uid,
+        'name': name,
+        'phone': phone,
+        'address': address,
+        'strv': strv,
+      });
+    }
   }
 
   Future<DocumentSnapshot> checkUserData(String uId) async {
