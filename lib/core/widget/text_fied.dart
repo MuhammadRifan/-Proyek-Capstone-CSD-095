@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -248,8 +250,10 @@ class FieldDateTime extends StatelessWidget {
 
     if (picked != null) {
       currentTime = picked;
-      DateTime pickedTimeFormat = DateFormat.jm().parse(picked.format(context));
-      ctrlText.text = DateFormat("HH:mm").format(pickedTimeFormat);
+      // log(currentTime.format(context));
+      // DateTime pickedTimeFormat = DateFormat.jm().parse(picked.format(context));
+      // ctrlText.text = DateFormat("HH:mm").format(pickedTimeFormat);
+      ctrlText.text = picked.format(context);
       if (nextFocus != null) FocusScope.of(context).requestFocus(nextFocus);
     }
   }

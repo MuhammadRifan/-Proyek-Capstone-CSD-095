@@ -24,6 +24,12 @@ class _ListVetCareState extends State<ListVetCare> {
   String _searchQuery = '';
 
   @override
+  void dispose() {
+    _ctrlSearch.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

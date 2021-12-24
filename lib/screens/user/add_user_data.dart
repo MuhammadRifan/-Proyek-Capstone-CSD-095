@@ -12,6 +12,7 @@ import '../../core/services/user_db_service.dart';
 import '../../core/widget/crop_image.dart';
 import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
+import '../screen_wrapper.dart';
 
 class AddUserData extends StatefulWidget {
   const AddUserData({
@@ -378,6 +379,14 @@ class _AddUserDataState extends State<AddUserData> {
                                                   : null,
                                               jenis: (_checkDoctor) ? 1 : 0,
                                             );
+
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ScreenWrapper(),
+                                          ),
+                                        );
                                       } else {
                                         await context
                                             .read<UserDatabaseService>()

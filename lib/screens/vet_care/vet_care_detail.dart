@@ -14,7 +14,7 @@ import '../../core/widget/flushbar.dart';
 import '../../core/widget/text_fied.dart';
 
 // ignore: must_be_immutable
-class VetCareDetail extends StatelessWidget {
+class VetCareDetail extends StatefulWidget {
   VetCareDetail({
     Key? key,
     required this.uid,
@@ -22,15 +22,30 @@ class VetCareDetail extends StatelessWidget {
 
   final String uid;
 
+  @override
+  State<VetCareDetail> createState() => _VetCareDetailState();
+}
+
+class _VetCareDetailState extends State<VetCareDetail> {
   final _ctrlDate = TextEditingController();
   final _ctrlTime = TextEditingController();
   final _ctrlNote = TextEditingController();
 
   final List _day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   final Set _dayView = {};
+
   String? _doctorUid;
   String? _imageVetCare;
   String? _nameVetCare;
+
+  @override
+  void dispose() {
+    _ctrlDate.dispose();
+    _ctrlTime.dispose();
+    _ctrlNote.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +106,9 @@ class VetCareDetail extends StatelessWidget {
                       hint: "Select Time",
                       timeInput: true,
                       borderOutline: false,
-                      onSaved: (val) {},
+                      onSaved: (val) {
+                        log(val.toString());
+                      },
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -130,7 +147,7 @@ class VetCareDetail extends StatelessWidget {
                           .addAppointment(
                             uidUser: userData.uid,
                             uidDoctor: _doctorUid!,
-                            uidVetCare: uid,
+                            uidVetCare: widget.uid,
                             nameVetCare: _nameVetCare!,
                             pictureVetCare: _imageVetCare!,
                             date: _ctrlDate.text,
@@ -198,7 +215,9 @@ class VetCareDetail extends StatelessWidget {
           ),
         ),
         child: FutureBuilder<DocumentSnapshot>(
-          future: context.read<VetCareDatabaseService>().dataVetCareDetail(uid),
+          future: context
+              .read<VetCareDatabaseService>()
+              .dataVetCareDetail(widget.uid),
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data!.exists) {
@@ -301,7 +320,7 @@ class VetCareDetail extends StatelessWidget {
                                 FutureBuilder<QuerySnapshot>(
                                   future: context
                                       .read<AppointmentDatabaseService>()
-                                      .dataRating(uid),
+                                      .dataRating(widget.uid),
                                   builder: (_, snapshot) {
                                     double rating = 0.0;
                                     int totalRating = 0;
