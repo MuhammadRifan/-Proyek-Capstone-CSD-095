@@ -3,7 +3,7 @@ description: Aplikasi Laporan dan Penjadwalan Pemeriksaan Lebih Lanjut Mengenai 
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -32,23 +32,23 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.4
   # for database
-  cloud_firestore: ^3.1.0
+  cloud_firestore: ^3.1.6
   # for firebase setup
-  firebase_core: ^1.10.0
+  firebase_core: ^1.11.0
   # for firebase auth
-  firebase_auth: ^3.3.0
+  firebase_auth: ^3.3.5
   # for storage database
-  firebase_storage: ^10.2.3
+  firebase_storage: ^10.2.5
   # for sign in with google
-  google_sign_in: ^5.2.1
+  google_sign_in: ^5.2.3
   # state management
-  provider: ^6.0.1
+  provider: ^6.0.2
   # font from google
-  google_fonts: ^2.1.0
+  google_fonts: ^2.2.0
   # snackbar alternate
-  another_flushbar: ^1.10.26
+  another_flushbar: ^1.10.28
   # custom loading stuff
   flutter_spinkit: ^5.1.0
   # image picker
@@ -86,7 +86,6 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -94,7 +93,6 @@ flutter:
 
   assets:
     - assets/images/
-
 
   # An image assets can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

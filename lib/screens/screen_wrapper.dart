@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class ScreenWrapper extends StatelessWidget {
     final user = context.watch<User?>();
 
     if (user != null) {
+      log(user.toString());
       if (!user.emailVerified) {
         Future<void>.delayed(Duration.zero, () {
           Alert.info(
@@ -37,6 +40,16 @@ class ScreenWrapper extends StatelessWidget {
           future: context.read<UserDatabaseService>().checkUserData(user.uid),
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                Future<void>.delayed(Duration.zero, () {
+                  Alert.error(
+                    context: context,
+                    msg: "Oops, something went wrong!",
+                  );
+                });
+                return const Login();
+              }
+
               if (snapshot.data!.exists) {
                 return Home(
                   uid: user.uid,
